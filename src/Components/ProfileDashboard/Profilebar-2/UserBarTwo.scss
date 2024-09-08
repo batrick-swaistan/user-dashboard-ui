@@ -1,0 +1,90 @@
+.user-bar-2 {
+  border: 1px solid #ffbfb4;
+  box-shadow: 0px 1px 10px #ffbfb4, 0px 4px 5px rgba(0, 0, 0, 0.14),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 10px;
+  background-color: #ffbfb4;
+  .user-about {
+    padding: 0px 30px;
+    .user-bio {
+      .my-bio {
+        .edit-icon {
+          height: 30px;
+          width: 30px;
+          &:hover {
+            background-color: #ff735c;
+            border-radius: 50%;
+            color: white;
+          }
+        }
+      }
+
+      .bio-content {
+        min-height: 150px;
+      }
+
+      .no-bio-content {
+        min-height: 150px;
+        user-select: none;
+      }
+    }
+
+    .user-skills {
+      .skill-title {
+        .edit-icon {
+          height: 30px;
+          width: 30px;
+          &:hover {
+            background-color: #ff735c;
+            border-radius: 50%;
+            color: white;
+          }
+        }
+      }
+
+      .skills {
+        .p-progressbar {
+          height: 0.5rem;
+        }
+        .p-progressbar-label {
+          display: none;
+        }
+        .p-progressbar .p-progressbar-value {
+          background-color: #ff735c;
+        }
+      }
+    }
+
+    .user-goals {
+      .goal-title {
+        .edit-icon {
+          height: 30px;
+          width: 30px;
+          &:hover {
+            background-color: #ff735c;
+            border-radius: 50%;
+            color: white;
+          }
+        }
+      }
+
+      // .no-goal-content {
+      //   padding: 0.5rem 1rem;
+      //   background-color: white;
+      //   border-radius: 8px;
+
+      //   user-select: none;
+      //   box-shadow: 0px 1px 10px #ffbfb4, 0px 4px 5px rgba(0, 0, 0, 0.14),
+      //     0px 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+
+      //   .p-card-content {
+      //     padding: 0px;
+      //   }
+
+      //   .p-button {
+      //     padding: 0.5rem 1rem;
+      //   }
+      // }
+    }
+  }
+}

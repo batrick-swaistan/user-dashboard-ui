@@ -1,0 +1,27 @@
+.user-profile-dashboard {
+  height: 100vh;
+  .dashboard-main {
+    height: 100%;
+    .dashboard-content {
+      width: 70%;
+      height: 100%;
+      //   background-color: aquamarine;
+      .dashboard-title {
+        height: 10%;
+      }
+
+      .user-profile-details {
+        height: 80%;
+      }
+    }
+  }
+}
+
+.p-button {
+  color: #ffffff;
+  background: #ff735c;
+  border: 1px solid #ff735c;
+}
+.p-button:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa698, 0 1px 2px 0 rgb(0, 0, 0);
+}

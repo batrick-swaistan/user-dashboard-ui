@@ -1,0 +1,88 @@
+.signup-container {
+  height: 100vh;
+  .signup-content {
+    height: 100%;
+    .signup-card {
+      height: 100%;
+      .signup-card-content {
+        width: 70%;
+        .sign-up-main-content {
+          width: 100%;
+          .signup-img {
+            width: 50%;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .signup-inp {
+            width: 50%;
+            .user-name {
+              .firstname-input {
+              }
+
+              .lastname-input {
+              }
+            }
+
+            .email-input {
+            }
+
+            .passowrd-input {
+              .p-icon-field {
+                width: 100%;
+
+                .p-password-input {
+                  width: 100%;
+                }
+              }
+            }
+
+            .confirm-passowrd-input {
+              .p-icon-field {
+                width: 100%;
+
+                .p-password-input {
+                  width: 100%;
+                }
+              }
+            }
+
+            .register-button {
+              .login {
+                font: 14px;
+                .login-button{
+                    color: #ff735c;
+                    text-decoration: underline;
+                }
+              }
+
+              .signup-btn {
+                // #ff735c
+              }
+              .p-button {
+                color: #ffffff;
+                background: #ff735c;
+                border: 1px solid #ff735c;
+              }
+              .p-button:focus {
+                box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa698,
+                  0 1px 2px 0 rgb(0, 0, 0);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: none;
+  border-color: #d1d5db;
+}
+
+.p-inputtext:enabled:hover {
+  border-color: #d1d5db;
+}

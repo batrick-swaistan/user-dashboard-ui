@@ -1,0 +1,23 @@
+.skills-dialog {
+  .dialog-content {
+    .skills-input {
+      .skills-text {
+      }
+
+      .skills-silder {
+        .p-slider .p-slider-range {
+          background-color: #ff735c;
+        }
+
+        .p-slider:not(.p-disabled) .p-slider-handle:hover {
+          border: #ff735c;
+          background-color: #ff735c;
+        }
+
+        .p-slider .p-slider-handle {
+          border: 2px solid #ff735c;
+        }
+      }
+    }
+  }
+}

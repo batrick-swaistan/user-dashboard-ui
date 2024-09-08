@@ -1,0 +1,42 @@
+.user-bar-1 {
+  border: 1px solid #ffbfb4;
+  box-shadow: 0px 1px 10px #ffbfb4, 0px 4px 5px rgba(0, 0, 0, 0.14),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+  background-color: #ffbfb4;
+  border-radius: 10px;
+  .user-profile-avatar {
+    .p-avatar.p-avatar-xl {
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+
+  .user-bio-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .p-card {
+      // background-color: #ff735c;
+    }
+    .user-bio-card {
+      width: 90%;
+      min-height: 374px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .user-card {
+        .my-profile {
+          .edit-icon {
+            height: 30px;
+            width: 30px;
+            &:hover {
+              background-color: #ffbfb4;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

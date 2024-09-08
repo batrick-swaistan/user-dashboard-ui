@@ -1,0 +1,38 @@
+.user-bar-3 {
+  border: 1px solid #ffbfb4;
+  box-shadow: 0px 1px 10px #ffbfb4, 0px 4px 5px rgba(0, 0, 0, 0.14),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 10px;
+  background-color: #ffbfb4;
+
+  .user-project-section {
+    padding: 0px 30px;
+
+    .project-title {
+      .add-icon {
+        height: 30px;
+        width: 30px;
+        background-color: #ff735c;
+        border-radius: 50%;
+        color: white;
+      }
+    }
+    .project-details {
+      .project-title {
+        .edit-icon {
+          height: 30px;
+          width: 30px;
+          &:hover {
+            background-color: #ff735c;
+            border-radius: 50%;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .no-project-content {
+     
+    }
+  }
+}
