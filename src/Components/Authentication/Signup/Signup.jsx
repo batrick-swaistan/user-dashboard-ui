@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import "./Signup.scss";
 import { Card } from "primereact/card";
 import SignupImg from "../../../Assets/Authentication/Signup/Signup-Vector.jpg";
+import TwoFact from "../../../Assets/Authentication/Signup/Two-Fact.png";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import EncryptPassword from "../../Utils/EncryptPassword";
+import { InputOtp } from "primereact/inputotp";
+import UserApi from "../../Api/UserApi";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,6 +18,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState("");
+  const [activeindex, setActiveIndex] = useState(0);
+  const [otp, setOtp] = useState();
   const navigate = useNavigate();
 
   const validate = () => {
@@ -63,12 +68,43 @@ const Signup = () => {
 
   const handleSignUp = () => {
     if (validate()) {
-      console.log(firstName);
-      console.log(lastName);
-      console.log(email);
-      console.log(EncryptPassword(password));
-      console.log(confirmPassword);
+      const payload = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: EncryptPassword(confirmPassword),
+      };
+
+      console.log(payload);
+
+      UserApi.registerUser(payload)
+        .then((res) => {
+          console.log(res.data);
+          setActiveIndex(1);
+        })
+
+        .catch((err) => {
+          console.error(err.message);
+        });
     }
+  };
+
+  const handleVerifyAccount = () => {
+    const payload = {
+      email: email,
+      otp: otp,
+    };
+
+    UserApi.verifyUser(payload)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("accessToken", res.data.token);
+        localStorage.setItem("userId", res.data.userId)
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
 
   return (
@@ -76,117 +112,154 @@ const Signup = () => {
       <div className="signup-content">
         <div className="signup-card flex flex-column justify-content-center align-items-center">
           <Card className="signup-card-content shadow-4">
-            <div className="sign-up-main-content flex  flex-row gap-2">
-              <div className="signup-img flex flex-1 ">
-                <img src={SignupImg} alt="sign-iup-image"></img>
-              </div>
-              <div className="signup-inp flex flex-column gap-4 flex-1 justify-content-center ">
-                <h2>Signup!</h2>
+            {activeindex === 0 && (
+              <div className="sign-up-main-content flex  flex-row gap-2">
+                <div className="signup-img flex flex-1 ">
+                  <img src={SignupImg} alt="sign-iup-image"></img>
+                </div>
+                <div className="signup-inp flex flex-column gap-4 flex-1 justify-content-center ">
+                  <h2>Signup!</h2>
 
-                <div className="user-name flex flex-row justify-content-between gap-3">
-                  <div className="firstname-input card flex flex-column  justify-content-center gap-2 flex-1">
-                    <label htmlFor="firstname">First Name</label>
+                  <div className="user-name flex flex-row justify-content-between gap-3">
+                    <div className="firstname-input card flex flex-column  justify-content-center gap-2 flex-1">
+                      <label htmlFor="firstname">First Name</label>
+                      <InputText
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        aria-describedby="firstname-error"
+                      />
+
+                      {errors.firstName && (
+                        <small className="p-error" id="firstname-error">
+                          {errors.firstName}
+                        </small>
+                      )}
+                    </div>
+
+                    <div className="lastname-input card flex flex-column justify-content-center gap-2 flex-1">
+                      <label htmlFor="lastname">Last Name</label>
+
+                      <InputText
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        aria-describedby="lastname-error"
+                      />
+                      {errors.lastName && (
+                        <small className="p-error" id="lastname-error">
+                          {errors.lastName}
+                        </small>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="email-input card flex  flex-column justify-content-center gap-2">
+                    <label htmlFor="email">Email</label>
+
                     <InputText
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      aria-describedby="firstname-error"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      aria-describedby="email-error"
                     />
 
-                    {errors.firstName && (
-                      <small className="p-error" id="firstname-error">
-                        {errors.firstName}
+                    {errors.email && (
+                      <small className="p-error" id="email-error">
+                        {errors.email}
                       </small>
                     )}
                   </div>
 
-                  <div className="lastname-input card flex flex-column justify-content-center gap-2 flex-1">
-                    <label htmlFor="lastname">Last Name</label>
-
-                    <InputText
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      aria-describedby="lastname-error"
+                  <div className="card flex  flex-column justify-content-center passowrd-input gap-2">
+                    <label htmlFor="passowrd">Passowrd</label>
+                    <Password
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      feedback={false}
+                      toggleMask={true}
+                      className="w-full"
+                      aria-describedby="passowrd-error"
                     />
-                    {errors.lastName && (
-                      <small className="p-error" id="lastname-error">
-                        {errors.lastName}
+                    {errors.password && (
+                      <small className="p-error" id="passowrd-error">
+                        {errors.password}
                       </small>
                     )}
                   </div>
-                </div>
 
-                <div className="email-input card flex  flex-column justify-content-center gap-2">
-                  <label htmlFor="email">Email</label>
+                  <div className="card flex  flex-column justify-content-center confirm-passowrd-input gap-2">
+                    <label htmlFor="confirm-passowrd">Confirm Password</label>
+                    <Password
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      feedback={false}
+                      toggleMask={true}
+                      className="w-full"
+                      aria-describedby="confirmPassword-error"
+                    />
+                    {errors.confirmPassword && (
+                      <small className="p-error" id="confirmPassword-error">
+                        {errors.confirmPassword}
+                      </small>
+                    )}
+                  </div>
 
-                  <InputText
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    aria-describedby="email-error"
-                  />
-
-                  {errors.email && (
-                    <small className="p-error" id="email-error">
-                      {errors.email}
-                    </small>
-                  )}
-                </div>
-
-                <div className="card flex  flex-column justify-content-center passowrd-input gap-2">
-                  <label htmlFor="passowrd">Passowrd</label>
-                  <Password
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    feedback={false}
-                    toggleMask={true}
-                    className="w-full"
-                    aria-describedby="passowrd-error"
-                  />
-                  {errors.password && (
-                    <small className="p-error" id="passowrd-error">
-                      {errors.password}
-                    </small>
-                  )}
-                </div>
-
-                <div className="card flex  flex-column justify-content-center confirm-passowrd-input gap-2">
-                  <label htmlFor="confirm-passowrd">Confirm Password</label>
-                  <Password
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    feedback={false}
-                    toggleMask={true}
-                    className="w-full"
-                    aria-describedby="confirmPassword-error"
-                  />
-                  {errors.confirmPassword && (
-                    <small className="p-error" id="confirmPassword-error">
-                      {errors.confirmPassword}
-                    </small>
-                  )}
-                </div>
-
-                <div className="register-button flex flex-row justify-content-between">
-                  <span className="login flex flex-row gap-2 align-items-center justify-content-center">
-                    Already a user?{" "}
-                    <span
-                      className="login-button cursor-pointer"
-                      onClick={() => {
-                        navigate("/login");
-                      }}
-                    >
-                      Login
-                    </span>{" "}
-                  </span>
-                  <Button
-                    label="Signup"
-                    icon="pi pi-sign-in"
-                    onClick={handleSignUp}
-                    iconPos="right"
-                    className="signup-btn"
-                  />
+                  <div className="register-button flex flex-row justify-content-between">
+                    <span className="login flex flex-row gap-2 align-items-center justify-content-center">
+                      Already a user?{" "}
+                      <span
+                        className="login-button cursor-pointer"
+                        onClick={() => {
+                          navigate("/login");
+                        }}
+                      >
+                        Login
+                      </span>{" "}
+                    </span>
+                    <Button
+                      label="Signup"
+                      icon="pi pi-sign-in"
+                      onClick={handleSignUp}
+                      iconPos="right"
+                      className="signup-btn"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
+            {activeindex === 1 && (
+              <div className="sign-up-main-content flex  flex-row gap-2">
+                <div className="signup-img flex flex-1 ">
+                  <img src={TwoFact} alt="sign-iup-image"></img>
+                </div>
+                <div className="signup-inp flex flex-column gap-4 flex-1 justify-content-center align-items-center">
+                  <h2>Verify OTP</h2>
+
+                  <div className="email-input card flex  flex-column justify-content-center gap-5">
+                    <span className="otp-sub">
+                      Enter the OTP recieved at {email}
+                    </span>
+
+                    <div className="card flex justify-content-center">
+                      <InputOtp
+                        value={otp}
+                        onChange={(e) => setOtp(e.value)}
+                        length={6}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="register-button flex flex-row justify-content-end">
+                    <Button
+                      label="Verify"
+                      icon="pi pi-check-circle"
+                      onClick={handleVerifyAccount}
+                      iconPos="right"
+                      className="signup-btn"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </Card>
         </div>
       </div>

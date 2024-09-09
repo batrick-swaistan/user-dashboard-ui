@@ -1,8 +1,11 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import React, { useState } from "react";
+import UserApi from "../../Api/UserApi";
 
-const UserBarDialog2 = () => {
+const UserBarDialog2 = ({ data, setData, handleCloseDialog }) => {
+  const accessToken = localStorage.getItem("accessToken");
+  const userId = localStorage.getItem("userId");
   const [userInfo, setUserInfo] = useState({
     age: "",
     location: "",
@@ -34,7 +37,26 @@ const UserBarDialog2 = () => {
   };
 
   const updateInfo = () => {
-    console.log(userInfo, socialLink);
+    const payload = {
+      userId: userId,
+      userInfo: userInfo,
+      socialLinks: socialLink,
+    };
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    UserApi.updateUserInfo(payload, config)
+      .then((res) => {
+        console.log(res.data);
+        handleCloseDialog();
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
   return (
     <div className="my-info">

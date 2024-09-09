@@ -8,6 +8,7 @@ const BioGoalDialog = ({
   setData,
   handleUpdateBio,
   handleUpdateGoal,
+  handleDialogClose,
 }) => {
   return (
     <div>
@@ -25,6 +26,7 @@ const BioGoalDialog = ({
             label="update"
             onClick={() => {
               dialog === "goal" ? handleUpdateGoal() : handleUpdateBio();
+              handleDialogClose();
             }}
           />
         </span>

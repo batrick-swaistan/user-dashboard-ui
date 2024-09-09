@@ -4,8 +4,11 @@ import { InputText } from "primereact/inputtext";
 import { Slider } from "primereact/slider";
 import { Button } from "primereact/button";
 import "./SkillsDialog.scss";
+import UserApi from "../../Api/UserApi";
 
 const SkillsDialog = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const userId = localStorage.getItem("userId");
   const [skills, setSkills] = useState([{ skill: "", rating: 0 }]);
 
   const handleSkillChange = (index, value) => {
@@ -32,7 +35,25 @@ const SkillsDialog = () => {
   };
 
   const handleUpdateSkill = () => {
-    console.log(skills);
+    const payload = {
+      userId: userId,
+      skills: skills,
+    };
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    UserApi.updateUserSkills(payload, config)
+      .then((res) => {
+        console.log(res.data);
+        // setData((prevData) => ({ ...prevData, goal: res.data.userGoal }));
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
 
   return (
