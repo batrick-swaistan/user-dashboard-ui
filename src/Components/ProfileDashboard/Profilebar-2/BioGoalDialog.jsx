@@ -18,6 +18,7 @@ const BioGoalDialog = ({
           onChange={(e) => setData(e.target.value)}
           rows={5}
           cols={60}
+          placeholder={`Enter your ${dialog === "goal" ? "goal" : "bio"}`}
         />
         <span className="text-right">
           <Button

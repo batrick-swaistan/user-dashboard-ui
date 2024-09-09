@@ -18,11 +18,11 @@ const UserBarOne = () => {
       >
         <div className="user-profile-avatar flex flex-column align-items-center ">
           <Avatar
-          image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
-          className="mb-2"
-          size="xlarge"
-          shape="circle"
-        />
+            image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
+            className="mb-2"
+            size="xlarge"
+            shape="circle"
+          />
 
           {/* <Avatar label="B" className="mb-2" size="xlarge" shape="circle" /> */}
 
@@ -50,56 +50,62 @@ const UserBarOne = () => {
         <div className="user-bio-data">
           <Card className="shadow-2 user-bio-card">
             <div className="user-card flex flex-column gap-1">
-            <div className="my-profile flex flex-row align-items-center justify-content-between">
-              <h2 className="m-0">My Profile</h2>
-              <span className="edit-icon cursor-pointer 1 flex flex-column justify-content-center align-items-center">
-                <i className="pi pi-pencil "></i>
-              </span>
-            </div>
-            <div className="age mt-3">
-              <span className="font-bold">Age:</span> 24
-            </div>
-            <div className="user-location">
-              <span className="font-bold">Location:</span> Kanyakumari
-            </div>
-            <div className="user-company">
-              <span className="font-bold">Company:</span> Althi Solutions
-            </div>
-            <div className="user-follow mt-3 flex flex-column gap-1">
-              <span className="font-bold my-2">Follow me on:</span>
-
-              <div className="follow-linkedin">
-                <span>
-                  <i className="pi pi-linkedin"></i>
-                </span>{" "}
-                Batrick Swaistan
+              <div className="my-profile flex flex-row align-items-center justify-content-between">
+                <h2 className="m-0">My Profile</h2>
+                <span
+                  className="edit-icon cursor-pointer 1 flex flex-column justify-content-center align-items-center"
+                  onClick={() => {
+                    setVisible(true);
+                    setDialog("your-info");
+                  }}
+                >
+                  <i className="pi pi-pencil "></i>
+                </span>
               </div>
-
-              <div className="follow-github">
-                <span>
-                  {" "}
-                  <i className="pi pi-github"></i>
-                </span>{" "}
-                Batrick Swaistan
+              <div className="age mt-3">
+                <span className="font-bold">Age:</span> 24
               </div>
-
-              <div className="follow-instagram">
-                <span>
-                  {" "}
-                  <i className="pi pi-instagram"></i>
-                </span>{" "}
-                Batrick Swaistan
+              <div className="user-location">
+                <span className="font-bold">Location:</span> Kanyakumari
               </div>
+              <div className="user-company">
+                <span className="font-bold">Company:</span> Althi Solutions
+              </div>
+              <div className="user-follow mt-3 flex flex-column gap-1">
+                <span className="font-bold my-2">Follow me on:</span>
 
-              <div className="follow-twitter">
-                <span>
-                  {" "}
-                  <i className="pi pi-twitter"></i>
-                </span>{" "}
-                Batrick Swaistan
+                <div className="follow-linkedin">
+                  <span>
+                    <i className="pi pi-linkedin"></i>
+                  </span>{" "}
+                  Batrick Swaistan
+                </div>
+
+                <div className="follow-github">
+                  <span>
+                    {" "}
+                    <i className="pi pi-github"></i>
+                  </span>{" "}
+                  Batrick Swaistan
+                </div>
+
+                <div className="follow-instagram">
+                  <span>
+                    {" "}
+                    <i className="pi pi-instagram"></i>
+                  </span>{" "}
+                  Batrick Swaistan
+                </div>
+
+                <div className="follow-twitter">
+                  <span>
+                    {" "}
+                    <i className="pi pi-twitter"></i>
+                  </span>{" "}
+                  Batrick Swaistan
+                </div>
               </div>
             </div>
-          </div>
 
             {/* <div className="no-card-details">
               <div className="no-card-content flex flex-column align-items-center justify-content-center gap-3 ">

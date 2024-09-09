@@ -45,6 +45,7 @@ const UserBarDialog2 = () => {
             placeholder="Enter your age"
             name="age"
             type="number"
+            max={2}
             onChange={handleUserInputChange}
           />
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfileDashboard.scss";
 import { Avatar } from "primereact/avatar";
 import { Card } from "primereact/card";
@@ -8,6 +8,7 @@ import UserBarTwo from "./Profilebar-2/UserBarTwo";
 import UserBarThree from "./Profilebar-3/UserBarThree";
 
 const ProfileDashboard = () => {
+  const [userData, setUserData] = useState({});
   return (
     <div className="user-profile-dashboard" id="dashboard">
       <div className="dashboard-main flex flex-column justify-content-center align-items-center">
