@@ -8,6 +8,13 @@
       //   background-color: aquamarine;
       .dashboard-title {
         height: 10%;
+
+        .delete {
+          color: red;
+        }
+
+        .logout {
+        }
       }
 
       .user-profile-details {
@@ -24,4 +31,10 @@
 }
 .p-button:focus {
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa698, 0 1px 2px 0 rgb(0, 0, 0);
+}
+
+.p-confirm-dialog-reject {
+  background: white;
+  color: black;
+  border-color: transparent;
 }

@@ -1,21 +1,25 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserApi from "../../Api/UserApi";
 
 const UserBarDialog2 = ({ data, setData, handleCloseDialog }) => {
   const accessToken = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userId");
+
+  console.log(data);
+
   const [userInfo, setUserInfo] = useState({
-    age: "",
-    location: "",
-    company: "",
+    age: data?.userInfo?.age || "",
+    location: data?.userInfo?.location || "",
+    company: data?.userInfo?.company || "",
   });
+
   const [socialLink, setSocialLink] = useState({
-    linkedin: "",
-    github: "",
-    instagram: "",
-    twitter: "",
+    linkedin: data?.social?.linkedin || "",
+    github: data?.social?.github || "",
+    instagram: data?.social?.instagram || "",
+    twitter: data?.social?.twitter || "",
   });
 
   const handleSocialInputChange = (e) => {
@@ -53,6 +57,11 @@ const UserBarDialog2 = ({ data, setData, handleCloseDialog }) => {
       .then((res) => {
         console.log(res.data);
         handleCloseDialog();
+        setData((prevData) => ({
+          ...prevData,
+          userInfo: res.data.userData.userInfo,
+          social: res.data.userData.social,
+        }));
       })
       .catch((err) => {
         console.error(err.message);
@@ -68,6 +77,7 @@ const UserBarDialog2 = ({ data, setData, handleCloseDialog }) => {
             name="age"
             type="number"
             max={2}
+            value={userInfo.age}
             onChange={handleUserInputChange}
           />
         </div>
@@ -76,6 +86,7 @@ const UserBarDialog2 = ({ data, setData, handleCloseDialog }) => {
           <InputText
             placeholder="Enter your location"
             name="location"
+            value={userInfo.location}
             onChange={handleUserInputChange}
           />
         </div>
@@ -84,6 +95,7 @@ const UserBarDialog2 = ({ data, setData, handleCloseDialog }) => {
           <InputText
             placeholder="Enter your company"
             name="company"
+            value={userInfo.company}
             onChange={handleUserInputChange}
           />
         </div>

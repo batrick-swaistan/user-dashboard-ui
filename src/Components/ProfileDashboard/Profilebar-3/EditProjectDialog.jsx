@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { InputTextarea } from "primereact/inputtextarea";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
 import UserApi from "../../Api/UserApi";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 
-const ProjectDialog = ({ data, setData, handleDialogClose }) => {
+const EditProjectDialog = ({ data, setData, handleDialogClose }) => {
   const accessToken = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userId");
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(data.title || "");
+  const [description, setDescription] = useState(data.description || "");
 
   const handleUpdateProject = () => {
     const config = {
@@ -20,17 +20,23 @@ const ProjectDialog = ({ data, setData, handleDialogClose }) => {
 
     const payload = {
       userId: userId,
+      projectId: data.projectId,
       title: title,
       description: description,
     };
 
     UserApi.updateUserProject(payload, config)
       .then((res) => {
+        handleDialogClose();
         setData((prevData) => ({
           ...prevData,
-          projects: [...prevData.projects, res.data.projectData],
+          project: [
+            ...prevData.project.filter(
+              (proj) => proj.projectId !== res.data.projectData.projectId
+            ),
+            res.data.projectData,
+          ],
         }));
-        handleDialogClose();
       })
       .catch((err) => {
         console.error(err.message);
@@ -46,6 +52,7 @@ const ProjectDialog = ({ data, setData, handleDialogClose }) => {
       setDescription(e.target.value);
     }
   };
+
   return (
     <div className="project-dialog">
       <div className="project-content flex flex-column gap-3">
@@ -70,10 +77,7 @@ const ProjectDialog = ({ data, setData, handleDialogClose }) => {
           />
 
           <small className="mt-2">
-            {description?.length > 0
-              ? `${characterLimit - description?.length}`
-              : 0}{" "}
-            Remaining
+            {characterLimit - description.length} Remaining
           </small>
         </div>
 
@@ -85,4 +89,4 @@ const ProjectDialog = ({ data, setData, handleDialogClose }) => {
   );
 };
 
-export default ProjectDialog;
+export default EditProjectDialog;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Signup.scss";
 import { Card } from "primereact/card";
 import SignupImg from "../../../Assets/Authentication/Signup/Signup-Vector.jpg";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import EncryptPassword from "../../Utils/EncryptPassword";
 import { InputOtp } from "primereact/inputotp";
 import UserApi from "../../Api/UserApi";
+import { Toast } from "primereact/toast";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -21,6 +22,7 @@ const Signup = () => {
   const [activeindex, setActiveIndex] = useState(0);
   const [otp, setOtp] = useState();
   const navigate = useNavigate();
+  const toast = useRef(null);
 
   const validate = () => {
     let tempErrors = {};
@@ -79,12 +81,24 @@ const Signup = () => {
 
       UserApi.registerUser(payload)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setActiveIndex(1);
+          toast.current.show({
+            severity: "success",
+            summary: "OTP",
+            detail: `${res.data.message}`,
+            life: 3000,
+          });
         })
 
         .catch((err) => {
           console.error(err.message);
+          toast.current.show({
+            severity: "error",
+            summary: "Error",
+            detail: `${err.response.data}`,
+            life: 3000,
+          });
         });
     }
   };
@@ -98,17 +112,32 @@ const Signup = () => {
     UserApi.verifyUser(payload)
       .then((res) => {
         console.log(res.data);
+        toast.current.show({
+          severity: "success",
+          summary: "Verified",
+          detail: `${res.data.message}`,
+          life: 500,
+        });
         localStorage.setItem("accessToken", res.data.token);
-        localStorage.setItem("userId", res.data.userId)
-        navigate("/dashboard");
+        localStorage.setItem("userId", res.data.userId);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 550);
       })
       .catch((err) => {
         console.error(err.message);
+        toast.current.show({
+          severity: "success",
+          summary: "Verified",
+          detail: `${err.response.data}`,
+          life: 500,
+        });
       });
   };
 
   return (
     <div id="signup" className="signup-container">
+      <Toast ref={toast} />
       <div className="signup-content">
         <div className="signup-card flex flex-column justify-content-center align-items-center">
           <Card className="signup-card-content shadow-4">
@@ -169,7 +198,7 @@ const Signup = () => {
                   </div>
 
                   <div className="card flex  flex-column justify-content-center passowrd-input gap-2">
-                    <label htmlFor="passowrd">Passowrd</label>
+                    <label htmlFor="passowrd">Password</label>
                     <Password
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -235,7 +264,7 @@ const Signup = () => {
                   <h2>Verify OTP</h2>
 
                   <div className="email-input card flex  flex-column justify-content-center gap-5">
-                    <span className="otp-sub">
+                    <span className="otp-sub text-center">
                       Enter the OTP recieved at {email}
                     </span>
 

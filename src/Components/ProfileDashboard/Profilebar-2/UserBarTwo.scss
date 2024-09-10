@@ -20,11 +20,12 @@
       }
 
       .bio-content {
-        min-height: 150px;
+        font-size: 14px;
+        word-break: break-word;
       }
 
       .no-bio-content {
-        min-height: 150px;
+        // min-height: 150px;
         user-select: none;
       }
     }
@@ -66,6 +67,11 @@
             color: white;
           }
         }
+      }
+
+      .goal-content {
+        font-size: 14px;
+        word-break: break-word;
       }
 
       // .no-goal-content {

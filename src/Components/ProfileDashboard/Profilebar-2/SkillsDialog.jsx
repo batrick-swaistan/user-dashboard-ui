@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
 import { Slider } from "primereact/slider";
 import { Button } from "primereact/button";
 import "./SkillsDialog.scss";
 import UserApi from "../../Api/UserApi";
 
-const SkillsDialog = () => {
+const SkillsDialog = ({ data, setData, handleDialogClose }) => {
   const accessToken = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userId");
-  const [skills, setSkills] = useState([{ skill: "", rating: 0 }]);
+  const [skills, setSkills] = useState(
+    data?.skills || [{ skill: "", rating: 0 }]
+  );
 
   const handleSkillChange = (index, value) => {
     const updatedSkills = [...skills];
@@ -49,7 +50,9 @@ const SkillsDialog = () => {
     UserApi.updateUserSkills(payload, config)
       .then((res) => {
         console.log(res.data);
-        // setData((prevData) => ({ ...prevData, goal: res.data.userGoal }));
+        setData((prevData) => ({ ...prevData, skills: res.data.skills }));
+
+        handleDialogClose();
       })
       .catch((err) => {
         console.error(err.message);
@@ -58,9 +61,12 @@ const SkillsDialog = () => {
 
   return (
     <div className="skills-dialog">
-      <div className="dialog-content gap-2">
+      <div className="dialog-content flex flex-column gap-4">
         {skills?.map((skill, index) => (
-          <div className="skills-input flex flex-row align-items-center mt-3 gap-5">
+          <div
+            className="skills-input flex flex-row align-items-center mt-3 gap-5"
+            key={index}
+          >
             <div className="skills-text flex flex-column">
               <InputText
                 id="skill"
@@ -89,6 +95,8 @@ const SkillsDialog = () => {
             )}
           </div>
         ))}
+
+        <small>Can add upto 5 skills!</small>
 
         <div className="buttons-skill flex flex-row justify-content-between">
           {skills.length < 5 && (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Login.scss";
 import { Button } from "primereact/button";
 import LogIn from "../../../Assets/Authentication/Login/Login-Vector.jpg";
@@ -6,15 +6,49 @@ import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { useNavigate } from "react-router-dom";
+import EncryptPassword from "../../Utils/EncryptPassword";
+import UserApi from "../../Api/UserApi";
+import { Toast } from "primereact/toast";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useRef(null);
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    const payload = {
+      email: email,
+      password: EncryptPassword(password),
+    };
+
+    UserApi.authenticateUser(payload)
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
+        toast.current.show({
+          severity: "success",
+          summary: "Authentication",
+          detail: `${res.data.message}`,
+          life: 500,
+        });
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 550);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.current.show({
+          severity: "error",
+          summary: "Authentication",
+          detail: `${err.response.data}`,
+          life: 500,
+        });
+      });
+  };
   return (
     <div id="login" className="login-container">
+      <Toast ref={toast} />
       <div className="login-content">
         <div className="login-card flex flex-column justify-content-center align-items-center">
           <Card className="login-card-content shadow-4">

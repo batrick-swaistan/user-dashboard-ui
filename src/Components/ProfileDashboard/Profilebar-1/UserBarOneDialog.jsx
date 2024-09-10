@@ -3,11 +3,16 @@ import QuillEditor from "../../Editor/QuillEditor";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Avatar } from "primereact/avatar";
+import UserApi from "../../Api/UserApi";
 
-const UserBarOneDialog = () => {
-  const [updatedFirstName, setUpdatedFirstName] = useState("");
-  const [updatedLastName, setUpdatedLastName] = useState("");
-  const [position, setPosition] = useState("");
+const UserBarOneDialog = ({ data, setData, handleCloseDialog }) => {
+  const accessToken = localStorage.getItem("accessToken");
+  const userId = localStorage.getItem("userId");
+  const [updatedFirstName, setUpdatedFirstName] = useState(
+    data?.firstName || ""
+  );
+  const [updatedLastName, setUpdatedLastName] = useState(data?.lastName || "");
+  const [position, setPosition] = useState(data?.position || "");
 
   const [profilePic, setProfilePic] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -24,17 +29,40 @@ const UserBarOneDialog = () => {
     setProfilePic(file);
     const objectUrl = URL.createObjectURL(file);
     setPreviewUrl(objectUrl);
-    // if (userDetails) {
-    //   setUserDetails((prevData) => ({
-    //     ...prevData,
-    //     profile: null,
-    //   }));
-    //   setPreviewUrl(objectUrl);
-    // }
+    if (data) {
+      setData((prevData) => ({
+        ...prevData,
+        profile: null,
+      }));
+      setPreviewUrl(objectUrl);
+    }
   };
 
   const handleUpdateProfile = () => {
     console.log(updatedFirstName, updatedLastName, position);
+
+    const formData = new FormData();
+
+    formData.append("userId", userId);
+    formData.append("firstName", updatedFirstName);
+    formData.append("lastName", updatedLastName);
+    formData.append("position", position);
+    formData.append("image", profilePic);
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    UserApi.updateUserProfile(formData, config)
+      .then((res) => {
+        handleCloseDialog();
+        setData(res.data.userData);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
   return (
     <div className="info-content flex flex-column gap-5 h-full p-4">
@@ -45,9 +73,9 @@ const UserBarOneDialog = () => {
         <div className="profile-photo-section flex flex-row  gap-3">
           <div className="profile-avatar">
             <span className="avatar">
-              {/* {userDetails?.profile ? (
+              {data?.profile ? (
                 <Avatar
-                //   image={`${process.env.REACT_APP_IMAGE_URL}/${userDetails.profile}`}
+                  image={`http://localhost:3500/${data?.profile}`}
                   size="xlarge"
                   shape="circle"
                 />
@@ -55,15 +83,11 @@ const UserBarOneDialog = () => {
                 <Avatar image={previewUrl} size="xlarge" shape="circle" />
               ) : (
                 <Avatar
-                  label={`${
-                    userData?.name
-                      ? userData?.name?.charAt(0)
-                      : userData?.firstname?.charAt(0)
-                  }`}
+                  label={`${data?.firstName.charAt(0)}`}
                   size="xlarge"
                   shape="circle"
                 />
-              )} */}
+              )}
             </span>
           </div>
           <div className="profile-buttons-update flex flex-column justify-content-center gap-3">
@@ -72,6 +96,7 @@ const UserBarOneDialog = () => {
               <small
                 className="cursor-pointer update"
                 onClick={triggerFileInput}
+                style={{ color: "green" }}
               >
                 Update
               </small>
@@ -87,7 +112,12 @@ const UserBarOneDialog = () => {
                 onClick={() => {
                   setPreviewUrl(null);
                   setProfilePic(null);
+                  setData((prevData) => ({
+                    ...prevData,
+                    profile: null,
+                  }));
                 }}
+                style={{ color: "red" }}
               >
                 Remove
               </small>
