@@ -30,7 +30,7 @@ const UserBarThree = ({ data, setData, loading }) => {
               <div className="project-title flex flex-row align-items-center justify-content-between">
                 <h2>Projects</h2>
 
-                {(data?.projects && data.projects.length <= 2) < 2 ? (
+                {(data?.projects && data?.projects?.length < 2) ? (
                   <>
                     <span
                       className="add-icon flex flex-column align-items-center justify-content-center cursor-pointer"
