@@ -227,6 +227,7 @@ const UserBarTwo = ({ data, setData, loading }) => {
             setGoal("");
           }}
           draggable={false}
+          className="dialog-bar-two"
         >
           <>
             {dialog === "skills" && (

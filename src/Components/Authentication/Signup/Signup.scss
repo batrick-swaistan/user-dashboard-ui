@@ -52,9 +52,9 @@
             .register-button {
               .login {
                 font: 14px;
-                .login-button{
-                    color: #ff735c;
-                    text-decoration: underline;
+                .login-button {
+                  color: #ff735c;
+                  text-decoration: underline;
                 }
               }
 
@@ -85,4 +85,68 @@
 
 .p-inputtext:enabled:hover {
   border-color: #d1d5db;
+}
+
+@media screen and (max-width: 490px) {
+  .signup-container {
+   height: 860px;
+    .signup-content {
+      height: 100%;
+      .signup-card {
+        height: 100%;
+        .signup-card-content {
+          width: 90%;
+          .sign-up-main-content {
+            width: 100%;
+            .signup-img {
+              display: none !important;
+            }
+
+            .signup-inp {
+              width: 100%;
+              .user-name {
+                flex-direction: column !important;
+              }
+              .register-button {
+                flex-direction: column !important;
+                gap: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .signup-container {
+   height: 860px;
+    .signup-content {
+      height: 100%;
+      .signup-card {
+        height: 100%;
+        .signup-card-content {
+          width: 90%;
+          .sign-up-main-content {
+            width: 100%;
+            .signup-img {
+              display: none !important;
+            }
+
+            .signup-inp {
+              width: 100%;
+              .user-name {
+                flex-direction: column !important;
+              }
+              .register-button {
+                flex-direction: column !important;
+                gap: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

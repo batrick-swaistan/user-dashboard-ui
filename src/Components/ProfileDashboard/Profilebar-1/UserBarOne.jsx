@@ -200,6 +200,7 @@ const UserBarOne = ({ data, setData, loading }) => {
             setVisible(false);
             setDialog("");
           }}
+          className="dialog-bar-one"
           draggable={false}
         >
           <>

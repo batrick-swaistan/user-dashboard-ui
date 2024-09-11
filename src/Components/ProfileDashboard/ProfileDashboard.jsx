@@ -106,10 +106,10 @@ const ProfileDashboard = () => {
           <div className="dashboard-title flex flex-row justify-content-between align-items-center">
             {accessToken ? (
               <>
-                <h1 className="m-0 p-4">
+                <h1 className="m-0 p-4 title">
                   Welcome {userData?.firstName} {userData?.lastName}
                 </h1>
-                <div>
+                <div className="log-del">
                   <span
                     className="delete p-4 cursor-pointer"
                     onClick={() => {

@@ -40,3 +40,15 @@
     }
   }
 }
+
+@media screen and (max-width: 490px) {
+  .dialog-bar-one{
+    width: 80% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dialog-bar-one{
+    width: 80% !important;
+  }
+}

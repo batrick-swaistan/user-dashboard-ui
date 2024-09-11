@@ -30,7 +30,7 @@ const UserBarThree = ({ data, setData, loading }) => {
               <div className="project-title flex flex-row align-items-center justify-content-between">
                 <h2>Projects</h2>
 
-                {(data?.projects && data?.projects?.length < 2) ? (
+                {data?.projects && data?.projects?.length < 2 ? (
                   <>
                     <span
                       className="add-icon flex flex-column align-items-center justify-content-center cursor-pointer"
@@ -53,7 +53,7 @@ const UserBarThree = ({ data, setData, loading }) => {
                     <>
                       <div className="project-details">
                         <div className="project-title flex flex-row align-items-center justify-content-between">
-                          <h3 >{project.title}</h3>
+                          <h3>{project.title}</h3>
 
                           <span
                             className="edit-icon cursor-pointer 1 flex flex-column justify-content-center align-items-center"
@@ -101,6 +101,7 @@ const UserBarThree = ({ data, setData, loading }) => {
             SetDialog("");
           }}
           draggable={false}
+          className="dialog-bar-three"
         >
           <>
             {dialog === "add-project" && (

@@ -40,3 +40,25 @@
     }
   }
 }
+@media screen and (max-width: 490px) {
+  .user-bar-3 {
+    .user-project-section  {
+      padding: 30px 30px;
+    }
+  }
+  .dialog-bar-three {
+    width: 80% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-bar-3 {
+    .user-project-section  {
+      padding: 30px 30px;
+    }
+  }
+  .dialog-bar-three {
+    width: 80% !important;
+  }
+}
+
