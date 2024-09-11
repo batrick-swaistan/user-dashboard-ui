@@ -21,3 +21,25 @@
     }
   }
 }
+
+@media screen and (max-width: 490px) {
+  .skills-dialog {
+    .dialog-content {
+      .skills-input {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .skills-dialog {
+    .dialog-content {
+      .skills-input {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+      }
+    }
+  }
+}
