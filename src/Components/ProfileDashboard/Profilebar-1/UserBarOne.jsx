@@ -32,7 +32,7 @@ const UserBarOne = ({ data, setData, loading }) => {
               {data?.profile ? (
                 <>
                   <Avatar
-                    image={`http://localhost:3500/${data?.profile}`}
+                    image={`${process.env.REACT_APP_SERVER_URL}/${data?.profile}`}
                     className="mb-2"
                     size="xlarge"
                     shape="circle"

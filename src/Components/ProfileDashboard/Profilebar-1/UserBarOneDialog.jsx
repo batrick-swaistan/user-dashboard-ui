@@ -75,7 +75,7 @@ const UserBarOneDialog = ({ data, setData, handleCloseDialog }) => {
             <span className="avatar">
               {data?.profile ? (
                 <Avatar
-                  image={`http://localhost:3500/${data?.profile}`}
+                  image={`${process.env.REACT_APP_SERVER_URL}/${data?.profile}`}
                   size="xlarge"
                   shape="circle"
                 />
