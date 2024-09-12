@@ -33,7 +33,7 @@ const UserBarOne = ({ data, setData, loading }) => {
                 <>
                   <Avatar
                     image={`${process.env.REACT_APP_SERVER_URL}/${data?.profile}`}
-                    className="mb-2"
+                    className="mb-2 avatar-img"
                     size="xlarge"
                     shape="circle"
                   />
@@ -42,7 +42,7 @@ const UserBarOne = ({ data, setData, loading }) => {
                 <>
                   <Avatar
                     label={`${data?.firstName?.charAt(0)}`}
-                    className="mb-2"
+                    className="mb-2 avatar-img"
                     size="xlarge"
                     shape="circle"
                   />

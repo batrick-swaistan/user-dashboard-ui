@@ -9,6 +9,12 @@
       width: 8rem;
       height: 8rem;
     }
+
+    .avatar-img{
+      img{
+        object-fit: cover;
+      }
+    }
   }
 
   .user-bio-data {

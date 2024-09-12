@@ -4,12 +4,21 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 
-const EditProjectDialog = ({ data, setData, handleDialogClose }) => {
+const EditProjectDialog = ({
+  selectedProject,
+  data,
+  setData,
+  handleDialogClose,
+}) => {
   const accessToken = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userId");
 
-  const [title, setTitle] = useState(data.title || "");
-  const [description, setDescription] = useState(data.description || "");
+  console.log(selectedProject);
+
+  const [title, setTitle] = useState(selectedProject?.title || "");
+  const [description, setDescription] = useState(
+    selectedProject?.description || ""
+  );
 
   const handleUpdateProject = () => {
     const config = {
@@ -20,7 +29,7 @@ const EditProjectDialog = ({ data, setData, handleDialogClose }) => {
 
     const payload = {
       userId: userId,
-      projectId: data.projectId,
+      projectId: selectedProject.projectId,
       title: title,
       description: description,
     };
@@ -30,8 +39,8 @@ const EditProjectDialog = ({ data, setData, handleDialogClose }) => {
         handleDialogClose();
         setData((prevData) => ({
           ...prevData,
-          project: [
-            ...prevData.project.filter(
+          projects: [
+            ...prevData.projects.filter(
               (proj) => proj.projectId !== res.data.projectData.projectId
             ),
             res.data.projectData,

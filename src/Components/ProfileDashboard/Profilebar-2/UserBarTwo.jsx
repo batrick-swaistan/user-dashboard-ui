@@ -102,7 +102,7 @@ const UserBarTwo = ({ data, setData, loading }) => {
 
                 {data?.bio ? (
                   <>
-                    <span className="bio-content">{data?.bio}</span>
+                    <span className="bio-content py-3">{data?.bio}</span>
                   </>
                 ) : (
                   <>
@@ -143,7 +143,7 @@ const UserBarTwo = ({ data, setData, loading }) => {
 
                 {data?.skills ? (
                   <>
-                    <div className="skills flex flex-column gap-2">
+                    <div className="skills flex flex-column gap-2 py-3">
                       {data?.skills.map((skill, index) => (
                         <div
                           className="skill-details flex flex-column gap-2"
@@ -196,7 +196,7 @@ const UserBarTwo = ({ data, setData, loading }) => {
 
                 {data?.goal ? (
                   <>
-                    <div className="goal-content">{data?.goal}</div>
+                    <div className="goal-content py-3">{data?.goal}</div>
                   </>
                 ) : (
                   <>
@@ -223,8 +223,6 @@ const UserBarTwo = ({ data, setData, loading }) => {
             if (!visible) return;
             setVisible(false);
             setDialog("");
-            setBio("");
-            setGoal("");
           }}
           draggable={false}
           className="dialog-bar-two"

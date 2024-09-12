@@ -129,7 +129,7 @@ const Signup = () => {
         toast.current.show({
           severity: "success",
           summary: "Verified",
-          detail: `${err.response.data}`,
+          detail: `${err?.response?.data}`,
           life: 500,
         });
       });
@@ -251,6 +251,7 @@ const Signup = () => {
                       className="signup-btn"
                     />
                   </div>
+                
                 </div>
               </div>
             )}

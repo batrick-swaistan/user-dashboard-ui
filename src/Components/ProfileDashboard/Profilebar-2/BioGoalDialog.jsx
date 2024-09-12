@@ -10,6 +10,9 @@ const BioGoalDialog = ({
   handleUpdateGoal,
   handleDialogClose,
 }) => {
+
+
+  console.log(data);
   const characterLimit = 155;
 
   const handleChange = (e) => {
@@ -19,6 +22,8 @@ const BioGoalDialog = ({
   };
 
   return (
+
+    
     <div>
       <div className="bio flex flex-column gap-3 ">
         <InputTextarea
@@ -30,7 +35,9 @@ const BioGoalDialog = ({
           placeholder={`Enter your ${dialog === "goal" ? "goal" : "bio"}`}
         />
         <small className="mt-2">
-          {data?.length > 0 ? `${characterLimit - data?.length}` : 0}{" "}
+          {data?.length > 0
+            ? `${characterLimit - data?.length}`
+            : characterLimit}{" "}
           Remaining
         </small>
         <span className="text-right">

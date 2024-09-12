@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import "./ProfileDashboard.scss";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import UserBarOne from "./Profilebar-1/UserBarOne";
@@ -8,6 +8,10 @@ import UserApi from "../Api/UserApi";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "primereact/skeleton";
 import { Toast } from "primereact/toast";
+
+
+const UserContext = createContext();
+
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState({});
@@ -138,25 +142,23 @@ const ProfileDashboard = () => {
             )}
           </div>
           <div className="user-profile-details flex flex-row  justify-content-between">
-            {userData && (
-              <>
-                <UserBarOne
-                  data={userData}
-                  setData={setUserData}
-                  loading={loading}
-                />
-                <UserBarTwo
-                  data={userData}
-                  setData={setUserData}
-                  loading={loading}
-                />
-                <UserBarThree
-                  data={userData}
-                  setData={setUserData}
-                  loading={loading}
-                />
-              </>
-            )}
+            <>
+              <UserBarOne
+                data={userData}
+                setData={setUserData}
+                loading={loading}
+              />
+              <UserBarTwo
+                data={userData}
+                setData={setUserData}
+                loading={loading}
+              />
+              <UserBarThree
+                data={userData}
+                setData={setUserData}
+                loading={loading}
+              />
+            </>
           </div>
         </div>
       </div>

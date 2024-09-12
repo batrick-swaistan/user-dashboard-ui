@@ -32,7 +32,17 @@ const UserBarThree = ({ data, setData, loading }) => {
                   <div className="project-title flex flex-row align-items-center justify-content-between">
                     <h2>Projects</h2>
 
-                    {data?.projects && data?.projects?.length < 2 ? (
+                    {/* <span
+                      className="add-icon flex flex-column align-items-center justify-content-center cursor-pointer"
+                      onClick={() => {
+                        setVisible(true);
+                        SetDialog("add-project");
+                      }}
+                    >
+                      <i className="pi pi-plus"></i>
+                    </span> */}
+
+                    {data?.projects.length <2 ? (
                       <>
                         <span
                           className="add-icon flex flex-column align-items-center justify-content-center cursor-pointer"
@@ -91,41 +101,42 @@ const UserBarThree = ({ data, setData, loading }) => {
               </>
             )}
           </div>
+
+          <div className="userbartwo-dialog">
+            <Dialog
+              header="Projects"
+              visible={visible}
+              style={{ width: "38vw" }}
+              onHide={() => {
+                if (!visible) return;
+                setVisible(false);
+                SetDialog("");
+              }}
+              draggable={false}
+              className="dialog-bar-three"
+            >
+              <>
+                {dialog === "add-project" && (
+                  <ProjectDialog
+                    data={data}
+                    setData={setData}
+                    handleDialogClose={handleDialogClose}
+                  />
+                )}
+
+                {dialog === "edit-project" && (
+                  <EditProjectDialog
+                    selectedProject={selectedProject}
+                    data={data}
+                    setData={setData}
+                    handleDialogClose={handleDialogClose}
+                  />
+                )}
+              </>
+            </Dialog>
+          </div>
         </>
       )}
-
-      <div className="userbartwo-dialog">
-        <Dialog
-          header="Projects"
-          visible={visible}
-          style={{ width: "38vw" }}
-          onHide={() => {
-            if (!visible) return;
-            setVisible(false);
-            SetDialog("");
-          }}
-          draggable={false}
-          className="dialog-bar-three"
-        >
-          <>
-            {dialog === "add-project" && (
-              <ProjectDialog
-                data={data}
-                setData={setData}
-                handleDialogClose={handleDialogClose}
-              />
-            )}
-
-            {dialog === "edit-project" && (
-              <EditProjectDialog
-                data={selectedProject}
-                setData={setData}
-                handleDialogClose={handleDialogClose}
-              />
-            )}
-          </>
-        </Dialog>
-      </div>
     </>
   );
 };
