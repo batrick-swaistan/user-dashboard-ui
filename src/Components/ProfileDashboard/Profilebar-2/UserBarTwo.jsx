@@ -76,7 +76,7 @@ const UserBarTwo = ({ data, setData, loading }) => {
   return (
     <>
       <div className="user-bar-2 flex-1 mx-2 flex flex-column justify-content-center">
-        <div className="user-about">
+        <div className="user-about h-full flex flex-column justify-content-around">
           {loading ? (
             <>
               <RectangleSkeleton />
@@ -110,7 +110,7 @@ const UserBarTwo = ({ data, setData, loading }) => {
                       <span>
                         Please provide a brief bio that includes key details
                         about your background, interests, and relevant
-                        experiences. 
+                        experiences.
                       </span>
                     </div>
                   </>

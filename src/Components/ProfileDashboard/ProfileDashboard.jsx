@@ -10,9 +10,6 @@ import { Skeleton } from "primereact/skeleton";
 import { Toast } from "primereact/toast";
 
 
-const UserContext = createContext();
-
-
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState({});
   const accessToken = localStorage.getItem("accessToken");

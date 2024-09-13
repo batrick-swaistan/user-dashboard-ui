@@ -42,7 +42,7 @@ const UserBarThree = ({ data, setData, loading }) => {
                       <i className="pi pi-plus"></i>
                     </span> */}
 
-                    {data?.projects.length <2 ? (
+                    {data?.projects?.length <2 ? (
                       <>
                         <span
                           className="add-icon flex flex-column align-items-center justify-content-center cursor-pointer"
