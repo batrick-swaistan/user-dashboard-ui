@@ -94,3 +94,25 @@
     }
   }
 }
+
+@media screen and (max-width: 490px) {
+  .user-bar-2 {
+    .user-about {
+      padding: 30px 30px;
+    }
+  }
+  .dialog-bar-two {
+    width: 80% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-bar-2 {
+    .user-about {
+      padding: 30px 30px;
+    }
+  }
+  .dialog-bar-two {
+    width: 80% !important;
+  }
+}

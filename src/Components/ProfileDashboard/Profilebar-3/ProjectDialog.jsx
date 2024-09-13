@@ -72,7 +72,7 @@ const ProjectDialog = ({ data, setData, handleDialogClose }) => {
           <small className="mt-2">
             {description?.length > 0
               ? `${characterLimit - description?.length}`
-              : 0}{" "}
+              : 255}{" "}
             Remaining
           </small>
         </div>

@@ -9,6 +9,12 @@
       width: 8rem;
       height: 8rem;
     }
+
+    .avatar-img{
+      img{
+        object-fit: cover;
+      }
+    }
   }
 
   .user-bio-data {
@@ -38,5 +44,17 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .dialog-bar-one{
+    width: 80% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dialog-bar-one{
+    width: 80% !important;
   }
 }

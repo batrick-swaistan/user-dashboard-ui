@@ -1,57 +1,54 @@
 .login-container {
-    height: 100vh;
-    .login-content {
+  height: 100vh;
+  .login-content {
+    height: 100%;
+    .login-card {
       height: 100%;
-      .login-card {
-        height: 100%;
-        .login-card-content {
-          width: 70%;
-          .login-up-main-content {
-            width: 100%;
-            .login-img {
-              width: 50%;
-              img {
+      .login-card-content {
+        width: 70%;
+        .login-up-main-content {
+          width: 100%;
+          .login-img {
+            width: 50%;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .login-inp {
+            width: 50%;
+
+            .passowrd-input {
+              .p-icon-field {
                 width: 100%;
-                height: 100%;
+
+                .p-password-input {
+                  width: 100%;
+                }
               }
             }
-  
-            .login-inp {
-              width: 50%;
-  
-              .passowrd-input {
-                .p-icon-field {
-                  width: 100%;
-  
-                  .p-password-input {
-                    width: 100%;
-                  }
+
+            .login-button {
+              .signup {
+                font: 14px;
+                .signup-button {
+                  color: #ff735c;
+                  text-decoration: underline;
                 }
               }
-  
 
-  
-              .login-button {
-                .signup {
-                  font: 14px;
-                  .signup-button{
-                      color: #ff735c;
-                      text-decoration: underline;
-                  }
-                }
-  
-                .signup-btn {
-                  // #ff735c
-                }
-                .p-button {
-                  color: #ffffff;
-                  background: #ff735c;
-                  border: 1px solid #ff735c;
-                }
-                .p-button:focus {
-                  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa698,
-                    0 1px 2px 0 rgb(0, 0, 0);
-                }
+              .signup-btn {
+                // #ff735c
+              }
+              .p-button {
+                color: #ffffff;
+                background: #ff735c;
+                border: 1px solid #ff735c;
+              }
+              .p-button:focus {
+                box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa698,
+                  0 1px 2px 0 rgb(0, 0, 0);
               }
             }
           }
@@ -59,13 +56,61 @@
       }
     }
   }
-  
-  .p-inputtext:enabled:focus {
-    box-shadow: none;
-    border-color: #d1d5db;
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: none;
+  border-color: #d1d5db;
+}
+
+.p-inputtext:enabled:hover {
+  border-color: #d1d5db;
+}
+
+@media screen and (max-width: 490px) {
+  .login-container {
+    height: 100vh;
+    .login-content {
+      .login-card {
+        .login-card-content {
+          width: 90%;
+          .login-up-main-content {
+            width: 100%;
+            .login-img {
+              display: none !important;
+            }
+
+            .login-button {
+              flex-direction: column !important;
+              gap: 15px;
+            }
+          }
+        }
+      }
+    }
   }
-  
-  .p-inputtext:enabled:hover {
-    border-color: #d1d5db;
+}
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    height: 100vh;
+    .login-content {
+      .login-card {
+        .login-card-content {
+          width: 90%;
+          .login-up-main-content {
+            width: 100%;
+            .login-img {
+              display: none !important;
+            }
+
+            .login-button {
+              flex-direction: column !important;
+              gap: 15px;
+            }
+          }
+        }
+      }
+    }
   }
-  
+}

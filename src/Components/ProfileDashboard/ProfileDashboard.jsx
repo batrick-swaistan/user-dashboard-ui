@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import "./ProfileDashboard.scss";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import UserBarOne from "./Profilebar-1/UserBarOne";
@@ -8,6 +8,7 @@ import UserApi from "../Api/UserApi";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "primereact/skeleton";
 import { Toast } from "primereact/toast";
+
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState({});
@@ -106,10 +107,10 @@ const ProfileDashboard = () => {
           <div className="dashboard-title flex flex-row justify-content-between align-items-center">
             {accessToken ? (
               <>
-                <h1 className="m-0 p-4">
+                <h1 className="m-0 p-4 title">
                   Welcome {userData?.firstName} {userData?.lastName}
                 </h1>
-                <div>
+                <div className="log-del">
                   <span
                     className="delete p-4 cursor-pointer"
                     onClick={() => {
@@ -138,25 +139,23 @@ const ProfileDashboard = () => {
             )}
           </div>
           <div className="user-profile-details flex flex-row  justify-content-between">
-            {userData && (
-              <>
-                <UserBarOne
-                  data={userData}
-                  setData={setUserData}
-                  loading={loading}
-                />
-                <UserBarTwo
-                  data={userData}
-                  setData={setUserData}
-                  loading={loading}
-                />
-                <UserBarThree
-                  data={userData}
-                  setData={setUserData}
-                  loading={loading}
-                />
-              </>
-            )}
+            <>
+              <UserBarOne
+                data={userData}
+                setData={setUserData}
+                loading={loading}
+              />
+              <UserBarTwo
+                data={userData}
+                setData={setUserData}
+                loading={loading}
+              />
+              <UserBarThree
+                data={userData}
+                setData={setUserData}
+                loading={loading}
+              />
+            </>
           </div>
         </div>
       </div>

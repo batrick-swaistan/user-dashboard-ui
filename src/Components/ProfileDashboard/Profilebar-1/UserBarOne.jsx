@@ -32,8 +32,8 @@ const UserBarOne = ({ data, setData, loading }) => {
               {data?.profile ? (
                 <>
                   <Avatar
-                    image={`http://localhost:3500/${data?.profile}`}
-                    className="mb-2"
+                    image={`${process.env.REACT_APP_SERVER_URL}/${data?.profile}`}
+                    className="mb-2 avatar-img"
                     size="xlarge"
                     shape="circle"
                   />
@@ -42,7 +42,7 @@ const UserBarOne = ({ data, setData, loading }) => {
                 <>
                   <Avatar
                     label={`${data?.firstName?.charAt(0)}`}
-                    className="mb-2"
+                    className="mb-2 avatar-img"
                     size="xlarge"
                     shape="circle"
                   />
@@ -200,6 +200,7 @@ const UserBarOne = ({ data, setData, loading }) => {
             setVisible(false);
             setDialog("");
           }}
+          className="dialog-bar-one"
           draggable={false}
         >
           <>
